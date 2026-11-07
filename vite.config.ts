@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 // BASE_URL is set via environment variable VITE_BASE_URL at build time.
@@ -13,4 +13,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: process.env.VITE_BASE_URL ?? '/',
+  test: {
+    // jsdom is required for React hook tests (useQuiz uses useState/useCallback).
+    // Pure utility tests (quiz.ts, score.ts, audio.ts) also run fine in jsdom.
+    environment: 'jsdom',
+    globals: true,
+  },
 })
