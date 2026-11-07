@@ -18,5 +18,6 @@ export default defineConfig({
     // Pure utility tests (quiz.ts, score.ts, audio.ts) also run fine in jsdom.
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['./src/test-setup.ts'],
   },
 })
